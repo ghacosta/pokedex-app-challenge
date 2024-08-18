@@ -7,10 +7,11 @@ import { typeColors } from '../utils/colors';
 interface PokemonDetailsProps {
   pokemon: Pokemon;
   onCatch: (pokemon: Pokemon) => void;
+  onRelease: (pokemon: Pokemon) => void;
   isCaught: boolean;
 }
 
-const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, onCatch, isCaught }) => {
+const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, onCatch, onRelease, isCaught }) => {
   const mainType = pokemon.types[0];
   const backgroundColor = typeColors[mainType as keyof typeof typeColors] || '#A8A77A';
 
@@ -47,8 +48,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, onCatch, isCau
         <Button
           variant="contained"
           startIcon={<CatchingPokemonIcon />}
-          onClick={() => onCatch(pokemon)}
-          disabled={isCaught}
+          onClick={isCaught ? () => onRelease(pokemon) : () => onCatch(pokemon)}
           sx={{
             backgroundColor: 'white',
             color: backgroundColor,
@@ -61,7 +61,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemon, onCatch, isCau
             },
           }}
         >
-          {isCaught ? 'Already Caught' : 'Catch Pokémon'}
+          {isCaught ? 'Release Pokémon' : 'Catch Pokémon'}
         </Button>
       </Box>
     </Container>
