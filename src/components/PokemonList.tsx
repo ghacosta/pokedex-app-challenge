@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Grid, CircularProgress } from '@mui/material';
 import PokemonCard from './PokemonCard';
 import SearchBar from './SearchBar';
 import { Pokemon } from '../types/pokemon';
 
 interface PokemonListProps {
   onSelectPokemon: (pokemon: Pokemon) => void;
+  onCatchPokemon: (pokemon: Pokemon) => void;
+  caughtPokemon: Pokemon[];
 }
 
-const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon }) => {
+const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon, onCatchPokemon, caughtPokemon }) => {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchPokemon();
@@ -33,8 +37,10 @@ const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon }) => {
       );
       setPokemon(results);
       setFilteredPokemon(results);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching Pokemon:', error);
+      setIsLoading(false);
     }
   };
 
@@ -45,12 +51,25 @@ const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon }) => {
     setFilteredPokemon(filtered);
   };
 
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      {filteredPokemon.map((p) => (
-        <PokemonCard key={p.id} pokemon={p} onClick={() => onSelectPokemon(p)} />
-      ))}
+      <Grid container spacing={2}>
+        {filteredPokemon.map((p) => (
+          <Grid item xs={12} sm={6} md={4} key={p.id}>
+            <PokemonCard
+              pokemon={p}
+              onClick={() => onSelectPokemon(p)}
+              onCatch={() => onCatchPokemon(p)}
+              isCaught={caughtPokemon.some(caught => caught.id === p.id)}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
