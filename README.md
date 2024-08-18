@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+### **Project Requirements**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The link to the Pokemon API can be found here: [Pokémon API](https://pokeapi.co/docs/v2)
 
-## Available Scripts
+1. **Pokémon List:**
+    - **Search Functionality:** Implement a search feature that allows users to find Pokémon by name. ✅
+    - **Display Information:** For each Pokémon, display:
+        - **Picture:** Utilize sprites from the Pokémon API. ✅
+        - **Name:** Clearly show the Pokémon's name. ✅
+2. **Pokémon Details:**
+    - **Detailed View:** Allow users to click on a Pokémon for more information, including:
+        - **Picture:** Provide a larger image. ✅
+        - **Name:** Reiterate the Pokémon's name. ✅
+        - **Type:** List all applicable types. ✅
+        - **EXTRA:** Added stats bar.✅
+3. **Caught Pokémon:**
+    - **Collection Feature:** Enable users to "catch" Pokémon and save them to their collection. ✅
+    - **Collection Display:** Show the user's collection with:
+        - **Picture, Name, and Type** for each Pokémon. ✅
+        - **EXTRA:** Created a separated navigation for search and caught pokémons. ✅
+4. **Data Management:**
+    - **Storage Options:** You have the option to use either localStorage or sessionStorage to manage the user's Pokémon collection. Choose the one that best fits your design for data persistence and session management. ✅
 
-In the project directory, you can run:
+### **Evaluation Criteria**
 
-### `npm start`
+- **Code Architecture:** Ensure your code is well-structured and follows best practices in React and TypeScript development. We’re looking for modular, maintainable, and scalable code, with a particular focus on how you manage application state. ✅
+- **Aesthetic Design:** We value a clean, responsive, and intuitive interface. Demonstrate your design capabilities. ✅
+- **Commit History:** A well-documented commit history is crucial. Ensure your commits reflect a logical development process with clear messages. ✅
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### **Technology Stack**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Frontend:** React ✅
+- **API:** Use the PokéAPI to fetch Pokémon data (no backend implementation required). ✅
 
-### `npm test`
+### **Bonus Points**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Material UI:** Utilize the Material UI design system to enhance the visual appeal and consistency of your application. ✅
 
-### `npm run build`
+### ***To Infinity and Beyond***
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If time allows, feel free to add extra features to showcase your skills, such as removing Pokémon from the collection. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ex. Delete caught Pokemons from a list. ✅
+- implemented commitlint + commitizen for better changelogs. ✅
