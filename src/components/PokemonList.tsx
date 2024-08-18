@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, CircularProgress } from '@mui/material';
+import { Grid, CircularProgress, Container, Typography } from '@mui/material';
 import PokemonCard from './PokemonCard';
 import SearchBar from './SearchBar';
 import { Pokemon } from '../types/pokemon';
 
 interface PokemonListProps {
   onSelectPokemon: (pokemon: Pokemon) => void;
-  onCatchPokemon: (pokemon: Pokemon) => void;
-  caughtPokemon: Pokemon[];
 }
 
-const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon, onCatchPokemon, caughtPokemon }) => {
+const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon }) => {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,21 +54,22 @@ const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon, onCatchPokem
   }
 
   return (
-    <div>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Pokedex
+      </Typography>
       <SearchBar onSearch={handleSearch} />
       <Grid container spacing={2}>
         {filteredPokemon.map((p) => (
-          <Grid item xs={12} sm={6} md={4} key={p.id}>
+          <Grid item xs={6} sm={4} md={3} key={p.id}>
             <PokemonCard
               pokemon={p}
               onClick={() => onSelectPokemon(p)}
-              onCatch={() => onCatchPokemon(p)}
-              isCaught={caughtPokemon.some(caught => caught.id === p.id)}
             />
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Container>
   );
 };
 

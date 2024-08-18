@@ -21,8 +21,6 @@ const MyPokemon: React.FC<MyPokemonProps> = ({ caughtPokemon, onSelectPokemon, o
             <PokemonCard
               pokemon={pokemon}
               onClick={() => onSelectPokemon(pokemon)}
-              onRelease={() => onReleasePokemon(pokemon)}
-              isCaught={true}
             />
           </Grid>
         ))}
