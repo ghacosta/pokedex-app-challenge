@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, IconButton } from '@mui/material';
+import { TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 interface SearchBarProps {
@@ -15,18 +15,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center' }}>
+    <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
       <TextField
+        fullWidth
         variant="outlined"
-        size="small"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search Pokémon"
-        fullWidth
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
       />
-      <IconButton type="submit" aria-label="search">
-        <SearchIcon />
-      </IconButton>
     </form>
   );
 };

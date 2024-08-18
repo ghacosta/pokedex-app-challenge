@@ -55,7 +55,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ onSelectPokemon }) => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom fontWeight={"bold"}>
         Pokedex
       </Typography>
       <SearchBar onSearch={handleSearch} />
