@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import PokemonList from './components/PokemonList';
+import PokemonDetails from './components/PokemonDetails';
+import CaughtPokemon from './components/CaughtPokemon';
+import { Pokemon } from './types/pokemon';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
-function App() {
+const App: React.FC = () => {
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+  const [caughtPokemon, setCaughtPokemon] = useLocalStorage<Pokemon[]>('caughtPokemon', []);
+
+  const handleSelectPokemon = (pokemon: Pokemon) => {
+    setSelectedPokemon(pokemon);
+  };
+
+  const handleCatchPokemon = () => {
+    if (selectedPokemon && !caughtPokemon.some(p => p.id === selectedPokemon.id)) {
+      setCaughtPokemon([...caughtPokemon, selectedPokemon]);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Pokedex App</h1>
+      <div style={{ display: 'flex' }}>
+        <div style={{ flex: 1 }}>
+          <PokemonList onSelectPokemon={handleSelectPokemon} />
+        </div>
+        <div style={{ flex: 1 }}>
+          {selectedPokemon && (
+            <PokemonDetails pokemon={selectedPokemon} onCatch={handleCatchPokemon} />
+          )}
+        </div>
+        <div style={{ flex: 1 }}>
+          <CaughtPokemon caughtPokemon={caughtPokemon} onSelectPokemon={handleSelectPokemon} />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
